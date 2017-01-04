@@ -1,0 +1,49 @@
+<ion-view cache-view="false" view-title="Pessoa" hide-back-button="true"> 
+  <ion-nav-buttons side="right"> 
+    <button class="button button-stable" ng-hide="Pessoa.inserting || Pessoa.editing" ng-click="Pessoa.startInserting()"> <i class="icon ion-plus-round"></i> </button> 
+    <button class="button button-stable" ng-show="Pessoa.inserting || Pessoa.editing" ng-click="Pessoa.post()"> <i class="icon ion-checkmark"></i> </button> 
+  </ion-nav-buttons> 
+  <ion-nav-buttons side="left"> 
+    <button class="button button-icon button-clear ion-navicon" ng-hide="Pessoa.inserting || Pessoa.editing" menu-toggle="left"> </button> 
+    <button class="button button-stable" ng-show="Pessoa.inserting || Pessoa.editing" ng-click="Pessoa.cancel()"> <i class="icon ion-android-arrow-back"></i> </button> 
+  </ion-nav-buttons> 
+  <ion-content> 
+    <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-906854"> 
+      <datasource name="Pessoa" entity="api/rest/Pessoa" keys="id" rows-per-page="100" delete-message="Deseja remover?"></datasource> 
+    </div> 
+    <div crn-datasource="Pessoa" ng-hide="Pessoa.editing || Pessoa.inserting"> 
+      <ion-list can-swipe="listCanSwipe"> 
+        <ion-item ng-repeat="rowData in datasource.data" class="item item-avatar" ng-click="datasource.startEditing(rowData)"> 
+          <img ng-src="{{rowData.foto}}"> 
+          <h2 content="{{rowData.nome}}">{{rowData.nome}}</h2> 
+          <p></p> 
+          <ion-option-button class="button-positive" ng-click="datasource.startEditing(rowData)"> 
+            <i class="icon ion-edit"></i> 
+          </ion-option-button> 
+          <ion-option-button class="button-assertive" ng-click="datasource.remove(rowData)">
+             &nbsp; 
+            <i class="icon ion-trash-a"></i> 
+          </ion-option-button> 
+        </ion-item> 
+      </ion-list> 
+    </div> 
+    <div ng-show="Pessoa.editing || Pessoa.inserting"> 
+      <form crn-datasource="Pessoa"> 
+        <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting"> 
+          <div class="list"> 
+            <!-- nome begin --> 
+            <label for="textinput-nome" class="item item-input item-stacked-label"> <span class="input-label">Nome</span> <input type="text" placeholder="Nome" ng-model="Pessoa.active.nome" id="textinput-nome" name="textinput-nome" required=""> </label> 
+            <!-- foto begin --> 
+            <label for="textinput-foto" class="item item-input item-stacked-label"> <span class="input-label">Foto</span> <input type="text" placeholder="Foto" ng-model="Pessoa.active.foto" id="textinput-foto" name="textinput-foto" required="" disabled="disabled"> </label> 
+            <div class="component-holder ng-binding ng-scope" data-component="crn-button" id="crn-button-775215" ng-controller="PessoaController"> 
+              <button class="button button-dark" type="submit" ng-click="addImage()">Button</button> 
+            </div> 
+            <div class="item item-image"> 
+              <img ng-src="{{Pessoa.active.foto}}"> 
+            </div> 
+          </div> 
+        </fieldset> 
+      </form> 
+    </div> 
+  </ion-content> 
+</ion-view>
